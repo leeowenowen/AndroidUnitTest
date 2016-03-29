@@ -26,10 +26,10 @@ public class MockitoTest {
   @Test
   public void testJudgeMock() {
     A a = mock(A.class);
-    A b = spy(a);
+    A b = spy(new A());
     Assert.assertTrue(Mockito.mockingDetails(a).isMock());
     Assert.assertFalse(Mockito.mockingDetails(a).isSpy());
-    Assert.assertFalse(Mockito.mockingDetails(b).isMock());
+    Assert.assertTrue(Mockito.mockingDetails(b).isMock());
     Assert.assertTrue(Mockito.mockingDetails(b).isSpy());
   }
 
@@ -38,7 +38,7 @@ public class MockitoTest {
     A a = mock(A.class);
     Mockito.when(a.publicMethod()).thenReturn("mockA");
     Assert.assertEquals("mockA", a.publicMethod());
-    Mockito.verify(a, times(0)).publicMethod();
+    Mockito.verify(a, times(1)).publicMethod();
     Mockito.verify(a, never()).foo();
   }
 
@@ -49,7 +49,7 @@ public class MockitoTest {
     Mockito.when(a.publicMethod()).thenReturn("mockA");
     Assert.assertEquals("mockA", a.publicMethod()); // mocked
     Assert.assertEquals("publicMethod2", a.publicMethod2()); // not mocked
-    Mockito.verify(a, times(0)).publicMethod();
+    Mockito.verify(a, times(1)).publicMethod();
   }
 
   @Test(expected = Exception.class)
