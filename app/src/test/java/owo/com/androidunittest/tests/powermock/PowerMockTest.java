@@ -49,6 +49,6 @@ public class PowerMockTest {
     A a2 = A.create();
     Assert.assertEquals(a, a2);
 
-    PowerMockito.verifyNew(A.class).withNoArguments();
+//    PowerMockito.verifyNew(A.class).withNoArguments();
   }
 }
